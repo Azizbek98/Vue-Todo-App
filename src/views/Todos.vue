@@ -43,6 +43,7 @@
             </div>
           </div>
           <div
+            v-if="todos.length === 0"
             class="px-8 py-16 bg-white text-gray-700 shadow-md rounded text-sm"
           >
             <p>You don't have tasks todo</p>
@@ -51,7 +52,12 @@
         <div class="col-span-6">
           <div class="p-8 bg-white shadow-md rounded">
             <h2 class="text-xl">Add todo</h2>
-            <input type="text" class="p-2 mt-4 border rounded w-full" />
+            <input
+              v-model="inputText"
+              @click="addTodo()"
+              type="text"
+              class="p-2 mt-4 border rounded w-full"
+            />
           </div>
         </div>
       </div>
@@ -61,19 +67,24 @@
 
 <script>
 // Composition API
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive, ref } from "vue";
 
 export default defineComponent({
   setup() {
-    const todos = reactive([
-      {
-        title: "First made todo",
+    const todos = reactive([]);
+    const inputText = ref(""); // it will be stored like: const inputText = {value: ""}
+
+    function addTodo() {
+      todos.unshift({
+        title: inputText.value,
         createdAt: new Date(),
-      },
-    ]);
+        done: false,
+      });
+    }
 
     return {
       todos,
+      inputText,
     };
 
     // In ES6 syntax also possible to use like this:
