@@ -8,20 +8,36 @@
           style="height: 500px"
         >
           <div
+            v-for="(todo, index) in todos"
+            :key="index"
             class="p-8 bg-white shadow-md rounded flex items-center justify-between"
           >
             <div>
-              <div>First Todo</div>
-              <div class="text-gray-500 text-sm"></div>
+              <div>{{ todo.title }}</div>
+              <div class="text-gray-500 text-sm">
+                {{ todo.createdAt.toString() }}
+              </div>
             </div>
             <div class="space-x-2">
-              <button class="px-2 text-red-600" title="Remove todo">
+              <button
+                class="px-1 text-red-600"
+                title="Remove todo"
+                style="font-size: 26px"
+              >
                 &times;
               </button>
-              <button class="px-2 text-green-600" title="Mark as complete">
+              <button
+                class="px-1 text-green-600"
+                title="Mark as complete"
+                style="font-size: 20px"
+              >
                 &check;
               </button>
-              <button class="px-2 text-green-600" title="Mark as undone">
+              <button
+                class="px-1 text-yellow-600"
+                title="Mark as undone"
+                style="font-size: 20px"
+              >
                 &#8630;
               </button>
             </div>
@@ -42,3 +58,28 @@
     </div>
   </div>
 </template>
+
+<script>
+// Composition API
+import { defineComponent, reactive } from "vue";
+
+export default defineComponent({
+  setup() {
+    const todos = reactive([
+      {
+        title: "First made todo",
+        createdAt: new Date(),
+      },
+    ]);
+
+    return {
+      todos,
+    };
+
+    // In ES6 syntax also possible to use like this:
+    // return {
+    //   todos,
+    // };
+  },
+});
+</script>
