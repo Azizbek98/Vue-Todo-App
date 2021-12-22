@@ -11,6 +11,7 @@
             v-for="(todo, index) in todos"
             :key="index"
             class="p-8 bg-white shadow-md rounded flex items-center justify-between"
+            :class="{ 'bg-green-200': todo.done }"
           >
             <div>
               <div>{{ todo.title }}</div>
@@ -20,6 +21,7 @@
             </div>
             <div class="space-x-2">
               <button
+                @click="removeTodo(index)"
                 class="px-1 text-red-600"
                 title="Remove todo"
                 style="font-size: 26px"
@@ -37,6 +39,7 @@
               </button>
               <button
                 v-else
+                @click="markAsUndone(index)"
                 class="px-1 text-yellow-600"
                 title="Mark as undone"
                 style="font-size: 20px"
@@ -91,11 +94,27 @@ export default defineComponent({
       todos[index].done = true;
     }
 
+    function markAsUndone(index) {
+      todos[index].done = false;
+    }
+
+    function removeTodo(index) {
+      if (!confirm(`Are you sure to delete this todo`)) {
+        return;
+      }
+
+      // first parameter in splice() is the index of element which should be deleted
+      // second is the number of elements which should be deleted
+      todos.splice(index, 1);
+    }
+
     return {
       todos,
       inputText,
       addTodo,
       markAsDone,
+      markAsUndone,
+      removeTodo,
     };
 
     // In ES6 syntax also possible to use like this:
