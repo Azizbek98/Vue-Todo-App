@@ -54,7 +54,7 @@
             <h2 class="text-xl">Add todo</h2>
             <input
               v-model="inputText"
-              @click="addTodo()"
+              @keydown.enter="addTodo()"
               type="text"
               class="p-2 mt-4 border rounded w-full"
             />
@@ -80,11 +80,14 @@ export default defineComponent({
         createdAt: new Date(),
         done: false,
       });
+
+      inputText.value = "";
     }
 
     return {
       todos,
       inputText,
+      addTodo,
     };
 
     // In ES6 syntax also possible to use like this:
