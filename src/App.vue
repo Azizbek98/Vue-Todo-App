@@ -17,3 +17,9 @@
   </nav>
   <router-view />
 </template>
+
+<style>
+body {
+  background-color: #eeeeff;
+}
+</style>
