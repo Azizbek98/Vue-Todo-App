@@ -81,11 +81,13 @@ export default defineComponent({
     const inputText = ref(""); // it will be stored like: const inputText = {value: ""}
 
     function addTodo() {
-      todos.unshift({
-        title: inputText.value,
-        createdAt: new Date(),
-        done: false,
-      });
+      if (inputText.value !== "") {
+        todos.unshift({
+          title: inputText.value,
+          createdAt: new Date(),
+          done: false,
+        });
+      }
 
       inputText.value = "";
     }
