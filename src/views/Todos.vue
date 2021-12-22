@@ -27,6 +27,8 @@
                 &times;
               </button>
               <button
+                v-if="!todo.done"
+                @click="markAsDone(index)"
                 class="px-1 text-green-600"
                 title="Mark as complete"
                 style="font-size: 20px"
@@ -34,6 +36,7 @@
                 &check;
               </button>
               <button
+                v-else
                 class="px-1 text-yellow-600"
                 title="Mark as undone"
                 style="font-size: 20px"
@@ -84,10 +87,15 @@ export default defineComponent({
       inputText.value = "";
     }
 
+    function markAsDone(index) {
+      todos[index].done = true;
+    }
+
     return {
       todos,
       inputText,
       addTodo,
+      markAsDone,
     };
 
     // In ES6 syntax also possible to use like this:
