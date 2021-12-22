@@ -9,7 +9,7 @@
         >
         <router-link
           class="inline-block px-16 py-4 transition-colors hover:bg-purple-500 duration-300"
-          :to="{}"
+          :to="{ name: 'Todos' }"
           >Todos</router-link
         >
       </div>
